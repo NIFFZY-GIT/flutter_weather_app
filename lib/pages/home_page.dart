@@ -31,7 +31,8 @@ class _HomePageState extends State<HomePage> {
       currentWeather = weather;
       if (forecast.isNotEmpty) {
         tomorrowWeather = forecast.firstWhere(
-            (w) => w.date!.day == DateTime.now().add(const Duration(days: 1)).day,
+            (w) =>
+                w.date!.day == DateTime.now().add(const Duration(days: 1)).day,
             orElse: () => forecast[0]);
       }
     });
@@ -55,24 +56,27 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                _locationInput(),
-                const SizedBox(height: 20),
-                currentWeather == null
-                    ? const CircularProgressIndicator()
-                    : Column(
-                        children: [
-                          _weatherSection(currentWeather, "Today"),
-                          const SizedBox(height: 20),
-                          if (tomorrowWeather != null)
-                            _weatherSection(tomorrowWeather, "Tomorrow"),
-                        ],
-                      ),
-              ],
+        body: Container(
+          color: Color.fromARGB(255, 237, 192, 255),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  _locationInput(),
+                  const SizedBox(height: 20),
+                  currentWeather == null
+                      ? const CircularProgressIndicator()
+                      : Column(
+                          children: [
+                            _weatherSection(currentWeather, "Today"),
+                            const SizedBox(height: 20),
+                            if (tomorrowWeather != null)
+                              _weatherSection(tomorrowWeather, "Tomorrow"),
+                          ],
+                        ),
+                ],
+              ),
             ),
           ),
         ),
@@ -107,67 +111,64 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
- ThemeData _darkTheme() {
-  return ThemeData(
-    primaryColor: Colors.deepPurple[900],
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.black,
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white, fontFamily: 'Roboto'),
-      bodyMedium: TextStyle(color: Colors.white70, fontFamily: 'Roboto'),
-   
-       titleLarge: TextStyle(
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontSize: 20,
-
-
-      ),
-    ),
-    cardColor: Colors.grey[850],
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.deepPurple[800],
-      titleTextStyle: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 22,
-        fontFamily: 'Roboto',
-      ),
-      iconTheme: const IconThemeData(color: Colors.white),
-    ),
-    iconTheme: const IconThemeData(color: Colors.deepPurpleAccent),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.deepPurpleAccent,
-        textStyle: const TextStyle(
-          fontSize: 16,
+  ThemeData _darkTheme() {
+    return ThemeData(
+      primaryColor: Colors.deepPurple[900],
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: Colors.black,
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Colors.white, fontFamily: 'Roboto'),
+        bodyMedium: TextStyle(color: Colors.white70, fontFamily: 'Roboto'),
+        titleLarge: TextStyle(
+          color: Colors.white,
           fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
-        shape: RoundedRectangleBorder(
+      ),
+      cardColor: Colors.grey[850],
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.deepPurple[800],
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          fontFamily: 'Roboto',
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      iconTheme: const IconThemeData(color: Colors.deepPurpleAccent),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.deepPurpleAccent,
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.grey[800],
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.deepPurpleAccent),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide:
+              const BorderSide(color: Colors.deepPurpleAccent, width: 2),
+        ),
+        labelStyle: const TextStyle(color: Colors.deepPurpleAccent),
       ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colors.grey[800],
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.deepPurpleAccent),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.deepPurpleAccent,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
-      ),
-      labelStyle: const TextStyle(color: Colors.deepPurpleAccent),
-    ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.deepPurpleAccent,
-    ),
-    dividerColor: Colors.deepPurple[400],
-  );
-}
-
+      dividerColor: Colors.deepPurple[400],
+    );
+  }
 
   Widget _locationInput() {
     return Row(
